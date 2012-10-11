@@ -1,0 +1,86 @@
+\documentclass{sigchi-alternate}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{layouts}
+\usepackage{lipsum}
+\usepackage{printlen}
+\uselengthunit{in}
+
+\title{Sigchi-alternate layout test}
+\numberofauthors{3}
+\author{
+  \alignauthor 1st Author Name\\
+    \affaddr{Affiliation}\\
+    \affaddr{Address}\\
+    \email{e-mail address}\\
+    \affaddr{Optional phone number}
+  \alignauthor 2nd Author Name\\
+    \affaddr{Affiliation}\\
+    \affaddr{Address}\\
+    \email{e-mail address}\\
+    \affaddr{Optional phone number}    
+  \alignauthor 3rd Author Name\\
+    \affaddr{Affiliation}\\
+    \affaddr{Address}\\
+    \email{e-mail address}\\
+    \affaddr{Optional phone number}}
+\toappear{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document is visualizing the layout settings for the sigchi-alternative class.
+\end{abstract}
+
+\makeatletter
+  \newlength{\myGmlmargin}
+  \setlength{\myGmlmargin}{\Gm@lmargin}
+  \newlength{\myGmrmargin}
+  \setlength{\myGmrmargin}{\Gm@rmargin}
+  \newlength{\myGmtmargin}
+  \setlength{\myGmtmargin}{\Gm@tmargin}
+  \newlength{\myGmbmargin}
+  \setlength{\myGmbmargin}{\Gm@bmargin}
+  \newlength{\myGmwidth}
+  \setlength{\myGmwidth}{\Gm@width}
+  \newlength{\myGmheight}
+  \setlength{\myGmheight}{\Gm@height}
+\makeatother
+
+\begin{tikzpicture}[overlay,remember picture]
+% Corners
+\coordinate (c0) at (current page.north west);
+\coordinate (c1) at (current page.north east);
+\coordinate (c2) at (current page.south east);
+\coordinate (c3) at (current page.south west);
+% Corners + margins
+\coordinate (m0) at ($ (c0) + (\myGmlmargin, -\myGmtmargin) $);
+\coordinate (m1) at ($ (c1) + (-\myGmlmargin, -\myGmtmargin) $);
+\coordinate (m2) at ($ (c2) + (-\myGmlmargin, \myGmbmargin) $);
+\coordinate (m3) at ($ (c3) + (\myGmlmargin, \myGmbmargin) $);
+\draw[line width=4pt,blue] (m0) -- (m1) -- (m2) -- (m3) -- cycle;
+% Horizontal margins
+\draw[line width=2pt,red,<->] ($(m0)!0.3!(m3)$) -- ($(m1)!0.3!(m2)$) node [midway,above] {\printlength{\myGmwidth}};
+\draw[line width=2pt,red,<->] ($(c0)!0.32!(c3)$) -- ($(m0)!0.3!(m3)$) node [midway,above] {\printlength{\myGmlmargin}};
+\draw[line width=2pt,red,<->] ($(c1)!0.32!(c2)$) -- ($(m1)!0.3!(m2)$) node [midway,above] {\printlength{\myGmrmargin}};
+% Vertical margins
+\draw[line width=2pt,red,<->] ($(m0)!0.2!(m1)$) -- ($(m3)!0.2!(m2)$) node [midway,above,rotate=90] {\printlength{\myGmheight}};
+\draw[line width=2pt,red,<->] ($(c0)!0.253!(c1)$) -- ($(m0)!0.2!(m1)$) node [midway,above,rotate=90] {\printlength{\myGmtmargin}};
+\draw[line width=2pt,red,<->] ($(c3)!0.253!(c2)$) -- ($(m3)!0.2!(m2)$) node [midway,above,rotate=90] {\printlength{\myGmbmargin}};
+% Column width
+\draw[line width=2pt,magenta,<->] ($(m1)!0.8!(m2)-(\linewidth,0)$) -- ($(m1)!0.8!(m2)$) node [midway,above] {\printlength{\linewidth}};
+
+\end{tikzpicture}
+
+\definecolor{lightgray}{rgb}{0.7,0.7,0.7}
+\textcolor{lightgray}{\lipsum[1-7]}
+
+\begin{figure*}
+ \currentpage
+ \twocolumnlayouttrue
+ \pagedesign
+ \caption{Page layout for this document (via \texttt{layouts} package)}
+\end{figure*}
+\end{document}
