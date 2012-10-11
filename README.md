@@ -16,7 +16,7 @@ Adapted from sigchi class previously edited by:
 Sigchi class adapted from ARTICLE document style by Ken Traub, Olin Shivers.
 Excerpts were taken from (Journal Style) 'esub2acm.cls'
 
-For format specification see http://sheridanprinting.com/sigchi/chi.htm.
+For format specification see http://sheridanprinting.com/sigchi/chi.htm (CHI) and http://sheridanprinting.com/sigchi/uist.htm (UIST).
 
 The new class sigchi-alternative makes extensive use of preexisting packages.
 LaTeX commands are used instead of TeX commands and all code has been grouped and formated more consistently.
