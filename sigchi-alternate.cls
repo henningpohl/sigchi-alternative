@@ -257,6 +257,10 @@
   \renewcommand{\@maketitle}{\relax}
   \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\gdef\@subtitle{}\let\thanks\relax
   \@copyrightspace
+  % Make sure no figures get placed in the first column of the first page. Taken from:
+  % http://tex.stackexchange.com/questions/63131/start-placing-figures-on-right-hand-side-column-of-first-page
+  \global\csname @topnum\endcsname 0
+  \global\csname @botnum\endcsname 0
 }
 \renewcommand{\@maketitle}{
   \newpage
