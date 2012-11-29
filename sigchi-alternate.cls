@@ -21,6 +21,7 @@
 \DeclareOption{10pt}{\ClassError{sigchi}{Option `10pt' not supported}{}}
 \DeclareOption{11pt}{\ClassError{sigchi}{Option `11pt' not supported}{}}
 \DeclareOption{12pt}{\ClassError{sigchi}{Option `12pt' not supported}{}}
+\DeclareOption{nohyperref}{\def\@dontloadhyperref{}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{proc}}
 \ProcessOptions
 \LoadClass[twocolumn]{proc} % extend proc class (is mosly overwritten)
@@ -100,14 +101,16 @@
 
 
 % Set some common hyperref parameters (assume pdftex is used)
-\RequirePackage[
-  pdftex,
-  bookmarks=true,
-  bookmarksnumbered=false,
-  colorlinks,
-  allcolors=black,
-  breaklinks=true,
-]{hyperref}
+\@ifundefined{@dontloadhyperref}{
+  \RequirePackage[
+    pdftex,
+    bookmarks=true,
+    bookmarksnumbered=false,
+    colorlinks,
+    allcolors=black,
+    breaklinks=true,
+  ]{hyperref}
+}{}
 
 
 % Disallow 'list of ...' and marginpar commands
