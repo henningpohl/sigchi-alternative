@@ -99,6 +99,17 @@
 \setcounter{secnumdepth}{-2} % turn of section numbering (-1 is part level)
 
 
+% Set some common hyperref parameters (assume pdftex is used)
+\RequirePackage[
+  pdftex,
+  bookmarks=true,
+  bookmarksnumbered=false,
+  colorlinks,
+  allcolors=black,
+  breaklinks=true,
+]{hyperref}
+
+
 % Disallow 'list of ...' and marginpar commands
 \renewcommand{\tableofcontents}{\ClassError{sigchi}{Tables of contents are not allowed.}{}}
 \renewcommand{\listoffigures}{\ClassError{sigchi}{Lists of figures are not allowed.}{}}
@@ -342,7 +353,7 @@
     }
   \fi
   \setcounter{footnote}{0}
-  \section*{Abstract}\normalsize
+  \section{Abstract}\normalsize
 }{
   \if@twocolumn\else\endquotation\fi
 }
@@ -422,7 +433,7 @@
 \let\@biblabel\@gobble
 \setlength{\bibindent}{0em}
 \renewenvironment{thebibliography}[1]{%
-  \section*{References\markboth{\refname}{\refname}}
+  \section{References}
   \begin{enumerate}
     \settowidth{\labelwidth}{#1.}
     \leftmargin\labelwidth
@@ -432,7 +443,6 @@
     \listparindent \itemindent
     \usecounter{enumi}
     \itemsep 2pt \@plus 1pt \@minus 1pt
-    
     \let\newblock\@empty
     \raggedright
     \sloppy
@@ -445,7 +455,7 @@
 % Appendix definition
 \renewcommand{\appendix}{
   \par
-  \section*{Appendix}
+  \section{Appendix}
   \setcounter{section}{0}
   \setcounter{subsection}{0}
   \def\thesection{\Alph{section}}  
