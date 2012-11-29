@@ -90,12 +90,12 @@
 \RequirePackage[overload]{textcase}
 \RequirePackage{titlesec}
 \titleformat{\section}[hang]{\baselineskip=14pt\fontsize{9}{14}\selectfont\bfseries\sffamily}{\thesection}{0.5em}{\MakeTextUppercase}
-\titlespacing{\section}{0pt}{8pt plus 3pt minus 3pt -\parskip}{0.5pt-\parskip}
+\titlespacing*{\section}{0pt}{8pt plus 3pt minus 3pt -\parskip}{0.5pt-\parskip}
 \titleformat{\subsection}[hang]{\baselineskip=14pt\fontsize{9}{14}\selectfont\bfseries\sffamily}{\thesubsection}{0.5em}{}
-\titlespacing{\subsection}{0pt}{8pt plus 3pt minus 3pt -\parskip}{0.5pt-\parskip}
+\titlespacing*{\subsection}{0pt}{8pt plus 3pt minus 3pt -\parskip}{0.5pt-\parskip}
 \titleformat{\subsubsection}[hang]{\baselineskip=14pt\fontsize{9}{14}\selectfont\itshape\sffamily}{\thesubsubsection}{0.5em}{}
-\titlespacing{\subsubsection}{0pt}{4pt plus 2pt minus 1pt -\parskip}{0.5pt-\parskip}
-\titlespacing{\paragraph}{0pt}{4pt plus 2pt minus 1pt -\parskip}{0.5pt-\parskip}
+\titlespacing*{\subsubsection}{0pt}{4pt plus 2pt minus 1pt -\parskip}{0.5pt-\parskip}
+\titlespacing*{\paragraph}{0pt}{4pt plus 2pt minus 1pt -\parskip}{0.5pt-\parskip}
 \setcounter{secnumdepth}{-2} % turn of section numbering (-1 is part level)
 
 
@@ -406,12 +406,12 @@
   }%
 }
 \newcommand{\confname}[1]{\textit{#1}}
-\newcommand{\confcopyright}[4]{%
+\newcommand{\confcopyright}[5][978-1-XXXX-XXXX-X/XX/XX...\$10.00]{%
   \toappear{%
     Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page.
     To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee.\\
-    \confname{#1}, #2, #3, #4.\\
-    Copyright #3 ACM 978-1-XXXX-XXXX-X/XX/XX...\$10.00.
+    \confname{#2}, #3, #4, #5.\\
+    Copyright #4 ACM #1.
   }
 }
 % Set default (here CHI 2013)
