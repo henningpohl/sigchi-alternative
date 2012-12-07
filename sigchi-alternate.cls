@@ -72,8 +72,19 @@
 \RequirePackage[T1]{fontenc}
 
 % Figure(*) and Table(*) fixes
-\RequirePackage{dblfloatfix}
 \RequirePackage{fixltx2e}
+
+% Figure layout rules
+\setcounter{topnumber}{2}
+\renewcommand{\topfraction}{.7}
+\setcounter{bottomnumber}{1}
+\renewcommand{\bottomfraction}{.3}
+\setcounter{totalnumber}{5} % allow more floats per page than default
+\renewcommand{\textfraction}{.2} 
+\renewcommand{\floatpagefraction}{.5}
+\setcounter{dbltopnumber}{2}
+\renewcommand{\dbltopfraction}{.7}
+\renewcommand{\dblfloatpagefraction}{.5}
 
 % Caption formating
 \RequirePackage[
@@ -83,7 +94,7 @@
   labelsep=period,
   justification=justified,
   singlelinecheck=true, % center one-line captions
-  skip=2pt % baselineskip
+  skip=2pt
 ]{caption}
 
 
