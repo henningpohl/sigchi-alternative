@@ -62,11 +62,12 @@
 
 % Make Helvetica default sans-serif font
 \RequirePackage[scaled]{helvet}
-\renewcommand{\sfdefault}{phv}
 
 % Make Times default serif font
-\RequirePackage{times}
-\renewcommand{\rmdefault}{ptm}
+\RequirePackage{mathptmx}
+
+% Make Courier default typewriter font
+\RequirePackage{courier}
 
 % Use Type1 fonts
 \RequirePackage[T1]{fontenc}
