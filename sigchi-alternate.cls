@@ -24,7 +24,7 @@
 \DeclareOption{nohyperref}{\def\@dontloadhyperref{}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{proc}}
 \ProcessOptions
-\LoadClass[twocolumn]{proc} % extend proc class (is mosly overwritten)
+\LoadClass[twocolumn]{proc} % extend proc class (is mostly overwritten)
 \input{sigchi-alternate.clo} % set font sizes to 9pt (code adapted from classes.dtx)
 
 % Paper size and margin definition
@@ -60,8 +60,8 @@
 % Required for copyright box on first page
 \RequirePackage{float} 
 
-% Make Helvetica default sans-serif font
-\RequirePackage[scaled]{helvet}
+% Make Helvetica default sans-serif font (scaled to match times)
+\RequirePackage[scaled=0.92]{helvet}
 
 % Make Times default serif font
 \RequirePackage{mathptmx}
@@ -102,6 +102,9 @@
 % Section format rules
 \RequirePackage[overload]{textcase}
 \RequirePackage{titlesec}
+% command syntax is:
+% \titleformat{COMMAND}[SHAPE]{FORMAT FOR WHOLE TITLE}{LABEL}{HORIZONTAL SPACE BETWEEN LABEL AND TITLE BODY}{BEFORE TITLE CODE}[AFTER TITLE CODE]
+% \titlespacing{COMMAND}{LEFT MARGIN}{VERTICAL SPACE BEFORE TITLE}{VERTICAL SPACE AFTER TITLE}[RIGHT MARGIN]
 \titleformat{\section}[hang]{\baselineskip=14pt\fontsize{9}{14}\selectfont\bfseries\sffamily}{\thesection}{0.5em}{\MakeTextUppercase}
 \titlespacing*{\section}{0pt}{8pt plus 3pt minus 3pt -\parskip}{0.5pt-\parskip}
 \titleformat{\subsection}[hang]{\baselineskip=14pt\fontsize{9}{14}\selectfont\bfseries\sffamily}{\thesubsection}{0.5em}{}
@@ -133,13 +136,13 @@
 
 
 % Various spacing commands
-\hfuzz 1pt          % Allow some variation in column width, otherwise it's
-                    % too hard to typeset in narrow columns.
-\parskip 6pt        % Extra vertical space between paragraphs.
-\parindent 0pt      % Width of paragraph indentation.
-\lineskip 2pt       % \lineskip is 1pt for all font sizes.
-\normallineskip 2pt
-\baselineskip=11pt
+\setlength{\hfuzz}{1pt}      % Allow some variation in column width, otherwise it's
+                             % too hard to typeset in narrow columns.
+\setlength{\parskip}{6pt}    % Extra vertical space between paragraphs.
+\setlength{\parindent}{0pt}  % Width of paragraph indentation.
+\setlength{\lineskip}{2pt}   % \lineskip is 1pt for all font sizes.
+\setlength{\normallineskip}{2pt}
+\setlength{\baselineskip}{11pt}
 
 
 % Set penalties
@@ -218,24 +221,24 @@
 \renewcommand{\theenumiv}{\Alph{enumiv}}
 \renewcommand{\labelenumiv}{\theenumiv.}
 % Left margins
-\leftmargini 10pt
-\leftmarginii 19.8pt    % > \labelsep + width of '(m)'
-\leftmarginiii 16.8pt   % > \labelsep + width of 'vii.'
-\leftmarginiv 15.3pt    % > \labelsep + width of 'M.'
-\leftmarginv 9pt
-\leftmarginvi 9pt
+\setlength{\leftmargini}{10pt}
+\setlength{\leftmarginii}{19.8pt}    % > \labelsep + width of '(m)'
+\setlength{\leftmarginiii}{16.8pt}   % > \labelsep + width of 'vii.'
+\setlength{\leftmarginiv}{15.3pt}    % > \labelsep + width of 'M.'
+\setlength{\leftmarginv}{9pt}
+\setlength{\leftmarginvi}{9pt}
 % Label separation width
-\labelsep 4.5pt
+\setlength{\labelsep}{4.5pt}
 
 
-% Numbering format commands (arent't actually used as numering is turned off)
-\def\thepart          {\Roman{part}} 
-\def\thesection       {\arabic{section}}
-\def\thesubsection    {\thesection.\arabic{subsection}}
-\def\thesubsubsection {\thesubsection.\arabic{subsubsection}}
-\def\theparagraph     {\thesubsubsection.\arabic{paragraph}}
-\def\thesubparagraph  {\theparagraph.\arabic{subparagraph}}
-\def\theequation      {\arabic{equation}}
+% Numbering format commands (arent't currently used as numbering is turned off)
+\renewcommand{\thepart}          {\Roman{part}} 
+\renewcommand{\thesection}       {\arabic{section}}
+\renewcommand{\thesubsection}    {\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection} {\thesubsection.\arabic{subsubsection}}
+\renewcommand{\theparagraph}     {\thesubsubsection.\arabic{paragraph}}
+\renewcommand{\thesubparagraph}  {\theparagraph.\arabic{subparagraph}}
+\renewcommand{\theequation}      {\arabic{equation}}
 
 
 % Footnote formating
@@ -252,16 +255,16 @@
 
 
 % Various spacing commands
-\arraycolsep 4.5pt   % Half the space between columns in an array environment.
-\tabcolsep 5.4pt     % Half the space between columns in a tabular environment.
-\arrayrulewidth .4pt % Width of rules in array and tabular environment.
-\doublerulesep 1.8pt % Space between adjacent rules in array or tabular env.
-\tabbingsep \labelsep   % Space used by the \' command.  (See LaTeX manual.)
+\setlength{\arraycolsep}{4.5pt}    % Half the space between columns in an array environment.
+\setlength{\tabcolsep}{5.4pt}      % Half the space between columns in a tabular environment.
+\setlength{\arrayrulewidth}{.4pt}  % Width of rules in array and tabular environment.
+\setlength{\doublerulesep}{1.8pt}  % Space between adjacent rules in array or tabular env.
+\setlength{\tabbingsep}{\labelsep} % Space used by the \' command.  (See LaTeX manual.)
 
 \skip\@mpfootins =\skip\footins
 
-\fboxsep =2.7pt      % Space left between box and text by \fbox and \framebox.
-\fboxrule =.4pt      % Width of rules in box made by \fbox and \framebox.
+\setlength{\fboxsep}{2.7pt}      % Space left between box and text by \fbox and \framebox.
+\setlength{\fboxrule}{.4pt}      % Width of rules in box made by \fbox and \framebox.
 
 
 % Commands for the title
