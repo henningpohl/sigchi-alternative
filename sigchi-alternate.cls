@@ -52,6 +52,7 @@
 % Load some utility packages
 \RequirePackage{etoolbox}
 \RequirePackage{calc}
+\RequirePackage{xparse}
 
 % Provides \balance command which has to be manually 
 % added at roughly the first column of the last page
@@ -391,20 +392,18 @@
   \begin{flushleft}#1\end{flushleft}
 }
 % More complex version for classification keywords
-\newcommand{\category}[3]{%
+\DeclareDocumentCommand\category{m m m o}{%
   \section*{\NoCaseChange{ACM Classification Keywords}}%
-  \@ifnextchar[{\@category{#1}{#2}{#3}}{\@category{#1}{#2}{#3}[]}%
+  #1 [#2]: #3%
+  \IfNoValueF{#4}{\kern\z@---\hskip\z@ \textit{#4}}%
   % now change \category to omit section title next time
-  \renewcommand{\category}[3]{; \hspace{5pt plus 3pt}%
-    \@ifnextchar[{\@category{##1}{##2}{##3}}{\@category{##1}{##2}{##3}[]}%
+  \DeclareDocumentCommand\category{m m m o}{%
+    \unskip ; \hspace{5pt plus 3pt}% 
+    #1 [#2]: #3%
+    \IfNoValueF{#4}{\kern\z@---\hskip\z@ \textit{#4}}%
   }%
 }
-\def\@category#1#2#3[#4]{%
-  \begingroup%
-    #1 [#2]: #3%
-    \if!#4! \else \kern\z@---\hskip\z@ \textit{#4}\fi%
-  \endgroup%
-}
+
 
 % Code for the copyright/toappear box at the bottom of the first page
 \newfloat{copyrightbox}{b}{cprbox}
