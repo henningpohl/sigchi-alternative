@@ -22,6 +22,7 @@
 \DeclareOption{11pt}{\ClassError{sigchi}{Option `11pt' not supported}{}}
 \DeclareOption{12pt}{\ClassError{sigchi}{Option `12pt' not supported}{}}
 \DeclareOption{nohyperref}{\def\@dontloadhyperref{}}
+\DeclareOption{tightbibliography}{\def\@tightbibliography{}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{proc}}
 \ProcessOptions
 \LoadClass[twocolumn]{proc} % extend proc class (is mostly overwritten)
@@ -442,6 +443,13 @@
     Copyright #4 ACM #1.
   }
 }
+\newcommand{\authorversion}[3]{%
+  \toappear{%
+    \urlstyle{same}
+    ACM, (#1). This is the authors version of the work. It is posted here by permission of ACM for your personal use. Not for redistribution. The definitive version was published in  #2, \url{http://doi.acm.org/#3}.
+	\urlstyle{tt}
+  }
+}
 % Set default (here CHI 2013)
 \confcopyright{CHI'13}{April 27--May 2}{2013}{Paris, France}
 
@@ -459,11 +467,17 @@
     \itemindent -\bibindent
     \listparindent \itemindent
     \usecounter{enumi}
-    \itemsep 2pt \@plus 1pt \@minus 1pt
+	\@ifundefined{@tightbibliography}{
+		\setlength{\itemsep}{2pt plus 1pt minus 1pt}
+	}{
+		\setlength{\topsep}{0pt}
+		\setlength{\partopsep}{0pt}
+		\setlength{\itemsep}{-1pt plus 1pt minus 1pt}
+	}
     \let\newblock\@empty
     \raggedright
     \sloppy
-    \sfcode`\.=1000\relax
+    \sfcode`\.=1000\relax % set space code for '.' to 1000
 }{%
   \end{enumerate}
 }
