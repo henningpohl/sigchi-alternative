@@ -1,0 +1,417 @@
+%% ---------------------------------------------------------------
+%% biblatex-sigchi --- A biblatex implementation of the ACM 
+%%   SIGCHI bibliography style
+%% Maintained by Henning Pohl
+%% E-mail: HenningPohl@gmail.com
+%% Released under the LaTeX Project Public License v1.3c or later
+%% See http://www.latex-project.org/lppl.txt
+%% ---------------------------------------------------------------
+
+\ProvidesFile{sigchi.bbx}[2013/09/08 v0.2 biblatex bibliography style]
+
+% Load the standard style to avoid copy-pasting unnecessary material
+\RequireBibliographyStyle{numeric-comp}
+
+% Alter settings that carry through from biblatex
+\ExecuteBibliographyOptions{
+  firstinits,
+  maxnames = 999,
+  minnames = 3,
+  sorting  = nyt
+}
+
+\uspunctuation
+
+%http://www.stackprinter.com/export?service=tex.stackexchange&question=12806&printer=false&linktohome=true
+
+\RequirePackage{procshorten}
+\newtoggle{bbx:procshorten}
+\DeclareBibliographyOption{procshorten}[true]{%
+  \settoggle{bbx:procshorten}{#1}%
+}
+
+\newtoggle{bbx:doititles}
+\DeclareBibliographyOption{doititles}[true]{%
+  \settoggle{bbx:doititles}{#1}%
+}
+
+% Custom field formats 
+\DeclareFieldFormat[patent]{number}{#1}
+\DeclareFieldFormat{pages}{#1}
+\DeclareFieldFormat{sentencecase}{\MakeSentenceCase{#1}}
+\DeclareFieldFormat{pages}{#1}
+\DeclareFieldFormat{booktitle}{\emph{#1}}
+\DeclareFieldFormat{url}{\bibstring{url}\addcolon\space\url{#1}}
+
+\DeclareNameFormat{author}{%
+  \usebibmacro{name:last-first}{#1}{#4}{#5}{#8}%
+  \ifthenelse{\value{listcount}<\value{liststop}}{,\space}{}%
+}
+
+% http://tex.stackexchange.com/questions/23832/biblatex-make-title-hyperlink-to-doi-url-if-available
+\newbibmacro{string+doi}[1]{%
+  \ifboolexpr{test {\iftoggle{bbx:doititles}} and not test {\iffieldundef{doi}}}{%
+    \href{http://dx.doi.org/\thefield{doi}}{#1}%
+  }{#1}%
+}
+\DeclareFieldFormat*{title}{\usebibmacro{string+doi}{#1\adddot}}
+
+
+\renewbibmacro*{doi+eprint+url}{%
+  \setunit{\adddot\addspace}%
+  \iftoggle{bbx:doi}
+    {\printfield{doi}}
+    {}%
+  \setunit{\adddot\addspace}%
+  \iftoggle{bbx:eprint}
+    {\usebibmacro{eprint}}
+    {}%  
+  \setunit{\adddot\addspace}%  
+  \iftoggle{bbx:url}
+    {\usebibmacro{url+urldate}}
+    {}%
+}
+
+\renewbibmacro*{url+urldate}{%
+  \printfield{url}
+  \printfield{urldate}
+}
+
+\renewbibmacro*{event+venue+date}{%
+  \iffieldundef{eventtitle}
+    {}
+    {%
+      \bibstring{presentedat}%
+      \printfield{eventtitle}%
+    }%
+  \ifboolexpr{
+    test {\iffieldundef{venue}}
+    and
+    test {\iffieldundef{eventyear}}
+  }
+    {}
+    {\setunit*{\addspace}%
+     \printtext[parens]{%
+       \printfield{venue}%
+       \setunit*{\addcomma\space}%
+       \printeventdate}}%
+  \newunit
+}
+
+\newbibmacro*{institution+location}{%
+  \printlist{institution}%
+  \newunit
+  \printlist{location}%
+  \newunit
+}
+
+\renewbibmacro*{institution+location+date}{%
+  \printlist{institution}%
+  \newunit
+  \printlist{location}%
+  \newunit
+  \usebibmacro{date}%
+  \newunit
+}
+  
+
+
+\newbibmacro*{pages}{%
+  \setunit{\bibpagespunct}%
+  \printfield{pages}%
+}
+
+\renewbibmacro*{title}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }
+    {}
+    {%
+      \printtext[title]{%
+        \printfield[sentencecase]{title}%
+        \setunit{\subtitlepunct}%
+        \printfield[sentencecase]{subtitle}%
+      }%
+      \newunit
+    }%
+  \printfield{titleaddon}%
+}
+
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \newunit%
+  \usebibmacro{title}%
+  \newunit\newblock
+  \usebibmacro{journal}%
+  \addcomma\space%
+  \iffieldundef{volume}{}{\printfield{volume}}%  
+  \iffieldundef{number}{}{\mkbibparens{\printfield{number}}}% 
+  \addcomma\space%
+  \usebibmacro{date}%
+  \addcolon
+  \usebibmacro{pages}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{maintitle+title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{volumes}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \setunit{\adddot\addspace}%
+  \newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{inbook}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{in:}%
+  \usebibmacro{bybookauthor}%
+  \usebibmacro{maintitle+booktitle}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit
+  \printfield{volumes}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \setunit{\adddot\addspace}%
+  \newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+
+\DeclareBibliographyDriver{inproceedings}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock	
+  \iffieldundef{maintitle}{}{%
+    \usebibmacro{maintitle}%
+    \newunit\newblock
+  }%
+  \iffieldundef{series}{%
+    \def\@shortProcTemp{}%
+    \iftoggle{bbx:procshorten}{\tryshortproctitle{\@shortProcTemp}}{}
+    \ifx \@shortProcTemp \@empty% use proceedings title from .bib
+      \usebibmacro{booktitle}%
+      \addperiod\space%
+      \usebibmacro{date}%
+    \else% use abbreviated proceedings title
+      \emph{\@shortProcTemp}%
+    \fi%
+  }{%    
+    \addspace%
+    \emph{Proc. \printfield{series}}%
+  }%  
+  \newunit%
+  \clearfield{eventtitle}%
+  \clearfield{number}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{online}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit{\adddot\addspace}%
+  \iffieldundef{date}{}{%
+    \printtext[parens]{\usebibmacro{date}}%
+  }%
+  \setunit{\adddot\addspace}%
+  \usebibmacro{title}%
+  \setunit{\adddot\addspace}%
+  \printlist{language}%
+  \setunit{\adddot\addspace}%
+  \usebibmacro{byauthor}%
+  \setunit{\adddot\addspace}%
+  \usebibmacro{byeditor+others}%
+  \setunit{\adddot\addspace}%
+  \printfield{version}%
+  \setunit{\adddot\addspace}%
+  \printfield{note}%
+  \newunit\newblock
+  \printlist{organization}%
+  \setunit{\adddot\addspace}%
+  \newunit\newblock
+  \usebibmacro{url+urldate}%
+  \setunit{\adddot\addspace}%
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{patent}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \printfield{type}%
+  \setunit*{\addspace}%
+  \printfield{number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{date}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{report}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{institution+location}%
+  \newunit\newblock
+  \printfield{type}%
+  \setunit*{\addspace}%
+  \printfield{number}%
+  \newunit\newblock
+  \printfield{version}%
+  \newunit\newblock
+  \usebibmacro{date}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isrn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+\DeclareFieldFormat{labelnumberwidth}{#1.}
+
+\defbibenvironment{bibliography} {
+  \list{%
+    \printfield[labelnumberwidth]{labelnumber}%
+  }{%
+	\setlength{\labelwidth}{\labelnumberwidth}%
+    \setlength{\leftmargin}{\labelwidth}%
+    \setlength{\labelsep}{\biblabelsep}%
+    \addtolength{\leftmargin}{\labelsep}%
+    \setlength{\itemsep}{\bibitemsep}%
+    \setlength{\parsep}{\bibparsep}
+  }%
+  \renewcommand*{\makelabel}[1]{\hss##1}
+}{\endlist}{\item}
+
+%% 
+%% Copyright (C) 2013 by
+%%   Henning Pohl <HenningPohl@gmail.com>
+%% 
+%% It may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License (LPPL), either version 1.3c of
+%% this license or (at your option) any later version.  The latest
+%% version of this license is in the file:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% This work is "maintained" (as per LPPL maintenance status) by
+%%   Henning Pohl.
+%% 
+%% This work consists of the files sigchi.bbx,
+%%                                 sigchi.cbx.
+%%
+%% End of file `sigchi.bbx'.

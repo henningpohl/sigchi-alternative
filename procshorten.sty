@@ -1,0 +1,30 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{procshorten}
+\RequirePackage{etoolbox}
+
+\def\@procNames{}
+\def\@empty{}
+
+\newcommand*{\@shortenedproceedingadd}[1]{
+  \ifx \@procNames \@empty 
+    \def\@procNames{#1}
+  \else 
+    \edef\@procNames{\@procNames|#1}
+   \fi
+}
+
+\newcommand*{\setshortenedproceedingnames}{
+  \let\do\@shortenedproceedingadd
+  \docsvlist
+}
+
+% http://tex.stackexchange.com/questions/4347/regular-expressions-with-pdftex
+% http://newsgroups.derkeiler.com/Archive/Comp/comp.text.tex/2007-12/msg00895.html
+\newcommand*{\tryshortproctitle}[1]{%
+  \def\@matchExp{.*((\@procNames)[ ]{0,1}'[0-9]+)}%
+  \savefield*{booktitle}{\@proctitle}
+  \ifnum\pdfmatch{\@matchExp}{\@proctitle}>0%
+    \def\@tempa{\expandafter\strip@prefix\pdflastmatch1}%
+    \def#1{Proc. \@tempa}%
+  \fi
+}

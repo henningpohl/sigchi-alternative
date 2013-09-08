@@ -20,6 +20,10 @@
 \makeatother
 \urlstyle{leo}
 
+% remove those two lines if you don't want to use biblatex
+\usepackage[style=sigchi,backend=bibtex,doititles]{biblatex}
+\addbibresource{sample.bib}
+
 % hyperref was already loaded by the documentclass.
 % Use nohyperref option to prevent this from happening.
 \hypersetup{
@@ -414,6 +418,10 @@ having to correct it later.
 % If you want to use smaller typesetting for the reference list,
 % uncomment the following line:
 % \small
-\bibliographystyle{acm-sigchi}
-\bibliography{sample}
+
+% If you don't want to use biblatex uncomment the following two lines and remove the one after
+%\bibliographystyle{acm-sigchi}
+%\bibliography{sample}
+\printbibliography
+
 \end{document}
