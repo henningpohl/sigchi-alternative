@@ -21,7 +21,7 @@ For format specification see http://sheridanprinting.com/sigchi/chi.htm (CHI) an
 The new class sigchi-alternative makes extensive use of preexisting packages.
 LaTeX commands are used instead of TeX commands and all code has been grouped and formated more consistently.
 
-Compile MarginTest.tex for a visualization of page margins, column widths and other layout settings.
+Compile `MarginTest.tex` for a visualization of page margins, column widths and other layout settings.
 
 
 SIGCHI biblatex style
