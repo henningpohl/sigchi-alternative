@@ -45,6 +45,8 @@
 \@ifundefined{footheight}{\newdimen\footheight}{}
 \setlength{\footheight}{12pt}
 
+\RequirePackage[tagged]{accessibility}
+
 \RequirePackage{amssymb}
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}
@@ -60,7 +62,7 @@
 \RequirePackage{balance}
 
 % Required for copyright box on first page
-\RequirePackage{float} 
+\RequirePackage{newfloat}
 
 % Make Helvetica default sans-serif font (scaled to match times)
 \RequirePackage[scaled=0.92]{helvet}
@@ -121,6 +123,7 @@
 \@ifundefined{@dontloadhyperref}{
   \RequirePackage[
     pdftex,
+	pdflang={en-US},
     bookmarks=true,
     bookmarksnumbered=false,
     colorlinks,
@@ -407,7 +410,7 @@
 
 
 % Code for the copyright/toappear box at the bottom of the first page
-\newfloat{copyrightbox}{b}{cprbox}
+\DeclareFloatingEnvironment[placement=b]{copyrightbox}
 \newcommand{\@copyrightspace}{
   \begin{copyrightbox}[b]
     \begin{center}

@@ -4,10 +4,6 @@
 % Consult the conference website for the camera-ready copyright statement.
 \confcopyright[978-1-4503-1015-4/12/05...\$10.00]{CHI'12}{May 5--10}{2012}{Austin, Texas, USA}
 
-% Arabic page numbers for submission. 
-% Remove this line to eliminate page numbers for the camera ready copy
-%\pagenumbering{arabic}
-
 % Load basic packages
 \usepackage{balance}  % to better equalize the last page
 \usepackage{graphicx} % for EPS, load graphicx instead
@@ -40,12 +36,12 @@ urlcolor=black,
 breaklinks=true,
 }
 
-% create a shortcut to typeset table headings
-\newcommand\tabhead[1]{\small\textbf{#1}}
-
-
 % End of preamble. Here it comes the document.
 \begin{document}
+
+% Arabic page numbers for submission. 
+% Add this line to eliminate page numbers for the camera ready copy
+%\pagestyle{empty}
 
 \title{SIGCHI Conference Proceedings Format}
 
@@ -205,6 +201,7 @@ of equal length.
 
 \begin{figure}[!h]
 \centering
+\alt{The image shows Building 10 on the MIT campus in winter.}
 \includegraphics[width=0.9\columnwidth]{Figure1}
 \caption{With Caption Below, be sure to have a good resolution image
   (see item D within the preparation instructions).}
@@ -239,9 +236,9 @@ communications should be acknowledged in the main text, not referenced
   \centering
   \begin{tabular}{|c|c|c|}
     \hline
-    \tabhead{Objects} &
-    \multicolumn{1}{|p{0.3\columnwidth}|}{\centering\tabhead{Caption --- pre-2002}} &
-    \multicolumn{1}{|p{0.4\columnwidth}|}{\centering\tabhead{Caption --- 2003 and afterwards}} \\
+    \thead{Objects} & 
+    \parbox{0.3\columnwidth}{\centering\thead{Caption --- pre-2002}} &
+    \parbox{0.4\columnwidth}{\centering\thead{Caption --- 2003 and afterwards}} \\
     \hline
     Tables & Above & Below \\
     \hline
