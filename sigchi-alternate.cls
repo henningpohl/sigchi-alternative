@@ -55,6 +55,9 @@
 \RequirePackage{calc}
 \RequirePackage{xparse}
 
+% The picture package is needed to use LaTeX lengths directly in the picture environment of the copyright box
+\RequirePackage{picture}
+
 % Provides \balance command which has to be manually 
 % added at roughly the first column of the last page
 \RequirePackage{balance}
@@ -413,7 +416,9 @@
   \begin{copyrightbox}[b]
     \begin{center}
       \setlength{\unitlength}{1pc}
-      \begin{picture}(20, 6)
+	  \newlength{\heightofta}
+	  \settoheight{\heightofta}{\fontsize{8}{9}\selectfont\rmfamily{\@toappear}}
+      \begin{picture}(\linewidth, \heightofta - 1.1pc)
         \put(0,-0.95){\fontsize{8}{9}\selectfont\rmfamily{\@toappear}}
       \end{picture}
     \end{center}
@@ -423,7 +428,7 @@
 \def\@toappear{}
 \newcommand{\toappear}[1]{%
   \def\@toappear{%
-    \parbox[b]{20pc}{\baselineskip 9pt  #1}%
+    \parbox[b]{20pc}{\baselineskip 9pt #1}%
   }%
 }
 \newcommand{\toappearbox}[1]{%
@@ -435,14 +440,11 @@
     }%
   }%
 }
-\newcommand{\confname}[1]{\textit{#1}}
-\newcommand{\confcopyright}[5][978-1-XXXX-XXXX-X/XX/XX...\$10.00]{%
-  \toappear{%
-    Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page.
-    To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee.\\
-    \confname{#2}, #3, #4, #5.\\
-    Copyright #4 ACM #1.
-  }
+\newcommand{\submissionversion}[1]{%
+  \toappearbox{\Large Submitted to #1. \\ Do not cite, do not circulate. } %
+}
+\newcommand{\finalversion}[1]{%
+  \toappear{#1} %
 }
 \newcommand{\authorversion}[3]{%
   \toappear{%
@@ -451,9 +453,8 @@
 	\urlstyle{tt}
   }
 }
-% Set default (here CHI 2013)
-\confcopyright{CHI'13}{April 27--May 2}{2013}{Paris, France}
-
+% Set default
+\toappearbox{Use the \texttt{\@backslashchar toappearbox\{ text \}} or \texttt{\@backslashchar submissionversion\{ conference \}} commands to change what's in this box. Use any of \texttt{\@backslashchar authorversion} or \texttt{\@backslashchar finalversion} commands for your camera-ready.}
 
 % Bibliography section
 \let\@biblabel\@gobble
