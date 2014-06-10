@@ -25,7 +25,7 @@
   \href{mailto:HenningPohl@gmail.com}
   {\texttt{HenningPohl@gmail.com}}}}
 \title{The \textsf{sigchi} bibliography style for \textsf{biblatex}%
-  \footnote{This file describes v0.2, last revised 2013/09/08.}}
+  \footnote{This file describes v0.3, last revised 2014/06/10.}}
 \date{Released 2013/09/08}
 
 \begin{document}
@@ -54,6 +54,10 @@ If you want automatic linking of \textsf{DOIs}, pass the \textsf{doititles} opti
 The paper titles will then be printed with hyperlinks.
 The link color can be controlled via the \textsf{urlcolor} option of the \textsf{hyperref} package.
 
+If you are short on space or just dislike the generous bibliography spacing, you can pass the \textsf{squeeze} flag to the package.
+This shrinks line spacing between individual entries to a more compact format.
+The package also shifts reference numbers slightly to the left which actually results in behavior similar to the official document style.
+
 The appearance of URLs in the bibliography is set by the mechanism of the
 \textsf{url} package.
 Thus to print URLs in the current roman font,
@@ -80,13 +84,14 @@ or can be sent by e-mail to
 \begin{description}
   \item[v0.1] First stable release (2012/10/03)
   \item[v0.2] Added test for whether \texttt{date} field is defined for \texttt{online} entries, and extended documentation (2013/09/08)
+  \item[v0.3] Added squeeze option which alters line spacing somewhat for a more compact bibliography (2014/06/10)
 \end{description}
 \end{multicols}
 
 \end{document}
 
 %% 
-%% Copyright (C) 2013 by
+%% Copyright (C) 2014 by
 %%   Henning Pohl <HenningPohl@gmail.com>
 %% 
 %% It may be distributed and/or modified under the conditions of
