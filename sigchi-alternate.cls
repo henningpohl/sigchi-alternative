@@ -45,8 +45,6 @@
 \@ifundefined{footheight}{\newdimen\footheight}{}
 \setlength{\footheight}{12pt}
 
-\RequirePackage[tagged]{accessibility}
-
 \RequirePackage{amssymb}
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}

@@ -36,6 +36,9 @@ urlcolor=black,
 breaklinks=true,
 }
 
+% create a shortcut to typeset table headings
+\newcommand\tabhead[1]{\small\textbf{#1}}
+
 % End of preamble. Here it comes the document.
 \begin{document}
 
@@ -201,7 +204,7 @@ of equal length.
 
 \begin{figure}[!h]
 \centering
-\alt{The image shows Building 10 on the MIT campus in winter.}
+%\alt{The image shows Building 10 on the MIT campus in winter.}
 \includegraphics[width=0.9\columnwidth]{Figure1}
 \caption{With Caption Below, be sure to have a good resolution image
   (see item D within the preparation instructions).}
@@ -236,9 +239,9 @@ communications should be acknowledged in the main text, not referenced
   \centering
   \begin{tabular}{|c|c|c|}
     \hline
-    \thead{Objects} & 
-    \parbox{0.3\columnwidth}{\centering\thead{Caption --- pre-2002}} &
-    \parbox{0.4\columnwidth}{\centering\thead{Caption --- 2003 and afterwards}} \\
+    \tabhead{Objects} &
+    \multicolumn{1}{|p{0.3\columnwidth}|}{\centering\tabhead{Caption --- pre-2002}} &
+    \multicolumn{1}{|p{0.4\columnwidth}|}{\centering\tabhead{Caption --- 2003 and afterwards}} \\
     \hline
     Tables & Above & Below \\
     \hline
