@@ -6,6 +6,7 @@
 \usepackage{lipsum}
 \usepackage{printlen}
 \uselengthunit{in}
+\usepackage[noframe]{showframe}
 
 \title{Sigchi-alternate layout test}
 \numberofauthors{3}
@@ -84,4 +85,143 @@ This document is visualizing the layout settings for the sigchi-alternative clas
  \pagedesign
  \caption{Page layout for this document (via \texttt{layouts} package)}
 \end{figure*}
+
+\clearpage
+\AddToShipoutPicture*{\ShowFramePicture}
+
+
+\twocolumn[\centering\Large Testing several length settings]
+
+\section{Text}
+
+\newcommand{\texttest}[2]{
+  \item[#1] {#2 The quick brown fox \ldots} \\
+  baselineskip = {#2 \the\baselineskip} \\
+  1ex = {#2 \the\fontdimen5\font} \\
+  abovedisplayskip = {#2 \the\abovedisplayskip} \\
+  belowdisplayskip = {#2 \the\belowdisplayskip}
+}
+
+\begin{description}
+  \texttest{scriptsize}{\scriptsize}
+  \texttest{tiny}{\tiny}
+  \texttest{small}{\small}
+  \texttest{normalsize}{\normalsize}
+  \texttest{footnotesize}{\footnotesize}
+  \texttest{large}{\large}
+  \texttest{Large}{\Large}
+  \texttest{LARGE}{\LARGE}
+%  \texttest{huge}{\huge}
+%  \texttest{Huge}{\Huge}
+\end{description}
+
+
+
+\section{Lists}
+
+\begin{itemize}
+  \item \textbf{Level 1}
+  \item itemsep=\the\itemsep
+  \item topsep=\the\topsep
+  \item parsep=\the\parsep
+  \item leftmargin=\the\leftmargin
+  \item labelwidth=\the\labelwidth
+  \begin{itemize}
+    \item \textbf{Level 2}
+    \item itemsep=\the\itemsep
+    \item topsep=\the\topsep
+    \item parsep=\the\parsep
+    \item leftmargin=\the\leftmargin
+    \item labelwidth=\the\labelwidth
+    \begin{itemize}
+      \item \textbf{Level 3}
+      \item itemsep=\the\itemsep
+      \item topsep=\the\topsep
+      \item parsep=\the\parsep
+      \item leftmargin=\the\leftmargin
+      \item labelwidth=\the\labelwidth
+      \begin{itemize}
+        \item \textbf{Level 4}
+        \item itemsep=\the\itemsep
+        \item topsep=\the\topsep
+        \item parsep=\the\parsep
+        \item leftmargin=\the\leftmargin
+        \item labelwidth=\the\labelwidth
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+\end{itemize}
+
+\newpage
+\AddToShipoutPicture*{\ShowFramePicture}
+
+\section{Enumerations}
+
+\begin{enumerate}
+  \item \textbf{Level 1}
+  \item itemsep=\the\itemsep
+  \item topsep=\the\topsep
+  \item parsep=\the\parsep
+  \item leftmargin=\the\leftmargin
+  \item labelwidth=\the\labelwidth
+  \begin{enumerate}
+    \item \textbf{Level 2}
+    \item itemsep=\the\itemsep
+    \item topsep=\the\topsep
+    \item parsep=\the\parsep
+    \item leftmargin=\the\leftmargin
+    \item labelwidth=\the\labelwidth
+    \begin{enumerate}
+      \item \textbf{Level 3}
+      \item itemsep=\the\itemsep
+      \item topsep=\the\topsep
+      \item parsep=\the\parsep
+      \item leftmargin=\the\leftmargin
+      \item labelwidth=\the\labelwidth
+      \begin{enumerate}
+        \item \textbf{Level 4}
+        \item itemsep=\the\itemsep
+        \item topsep=\the\topsep
+        \item parsep=\the\parsep
+        \item leftmargin=\the\leftmargin
+        \item labelwidth=\the\labelwidth
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+\end{enumerate}
+
+\newpage
+
+\section{Other Lengths}
+
+\begin{description}
+  \item[floatsep] \the\floatsep
+  \item[partopsep] \the\partopsep
+  \item[textfloatsep] \the\textfloatsep
+  \item[hfuzz] \the\hfuzz
+  \item[parskip] \the\parskip
+  \item[parindent] \the\parindent
+  \item[lineskip] \the\lineskip
+  \item[normallineskip] \the\normallineskip
+  \item[baselineskip] \the\baselineskip
+\end{description}
+
 \end{document}
