@@ -7,10 +7,12 @@
 %% See http://www.latex-project.org/lppl.txt
 %% ---------------------------------------------------------------
 
-\ProvidesFile{sigchi.bbx}[2014/06/10 v0.3 biblatex bibliography style]
+\ProvidesFile{sigchi.bbx}[2014/07/18 v0.4 biblatex bibliography style]
 
 % Load the standard style to avoid copy-pasting unnecessary material
 \RequireBibliographyStyle{numeric-comp}
+
+\RequirePackage{ragged2e}
 
 % Alter settings that carry through from biblatex
 \ExecuteBibliographyOptions{
@@ -399,11 +401,12 @@
     \setlength{\itemsep}{\bibitemsep}%
     \setlength{\parsep}{\bibparsep}
 	\iftoggle{bbx:squeeze}{%
-		\setlength{\leftmargin}{\labelwidth minus 4pt}%
+		\setlength{\leftmargin}{0.99\labelwidth minus 4pt}%
 		\setlength{\itemsep}{2pt plus 1pt minus 1pt}%
 	}%
   }%
   \renewcommand*{\makelabel}[1]{\hss##1}
+  \RaggedRight
 }{\endlist}{\item}
 
 %% 
