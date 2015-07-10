@@ -449,7 +449,7 @@
 \newcommand{\authorversion}[3]{%
   \toappear{%
     \urlstyle{same}
-    ACM, (#1). This is the authors version of the work. It is posted here by permission of ACM for your personal use. Not for redistribution. The definitive version was published in  #2, \url{http://doi.acm.org/#3}.
+    \textcopyright{} #1. This is the author's version of the work. It is posted here by permission of ACM for your personal use. Not for redistribution. The definitive version was published in #2, \url{http://doi.acm.org/#3}.
 	\urlstyle{tt}
   }
 }
